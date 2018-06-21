@@ -14,7 +14,7 @@ class ChengyuspiderSpider(scrapy.Spider):
         # scrapy.http.Request(chengyu_url, self.chengyu_parse)
         yield self.chengyu_parse(response)
         next_page = response.xpath('//*[@id="caicy_act_div"]/a/@href').extract()[0].split('/')[-1]
-        next_chengyu_url = f'http://www.jyedu.org/ktccy/{next_page}'
+        next_chengyu_url = 'http://www.jyedu.org/ktccy/' + next_page
         yield scrapy.http.Request(next_chengyu_url, self.parse)
 
     def chengyu_parse(self, response):
@@ -30,7 +30,7 @@ class ChengyuspiderSpider(scrapy.Spider):
     def extract_text(self, response):
         text = []
         for x in range(24):
-            xpath_src = f'//*[@id="caicy_select_{x}"]/text()'
+            xpath_src = '//*[@id="caicy_select_' + str(x) + '"]/text()'
             if len(response.xpath(xpath_src).extract()) > 0:
                 text.append(response.xpath(xpath_src).extract()[0])
         return text
