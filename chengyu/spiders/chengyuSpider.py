@@ -19,7 +19,7 @@ class ChengyuspiderSpider(scrapy.Spider):
 
     def chengyu_parse(self, response):
         chengyu_item = ChengyuItem()
-        chengyu_item['index'] = response.url.split('/')[-1].split('.')[0]
+        chengyu_item['index'] = int(response.url.split('/')[-1].split('.')[0])
         chengyu_item['pic'] = 'http://www.jyedu.org/' + response.xpath('//*[@id="caicy_1"]/p/img/@src').extract()[
             0]
         chengyu_item['answer'] = response.xpath('//*[@id="the_answer"]/@value').extract()[0]
