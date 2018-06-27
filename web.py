@@ -22,5 +22,13 @@ def get_data():
     return jsonify(response), 200
 
 
+@app.route('/version')
+def check_version():
+    response = {
+        "version": 100
+    }
+    return jsonify(response), 200
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8888)
