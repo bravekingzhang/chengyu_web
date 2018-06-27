@@ -33,4 +33,4 @@ class ChengyuspiderSpider(scrapy.Spider):
             xpath_src = '//*[@id="caicy_select_' + str(x) + '"]/text()'
             if len(response.xpath(xpath_src).extract()) > 0:
                 text.append(response.xpath(xpath_src).extract()[0])
-        return text
+        return ",".join(text)
